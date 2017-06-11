@@ -16,13 +16,41 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="admin" />
+        <module name="common" />
         <module name="manager" />
+        <module name="mobile" />
+        <module name="model" />
+        <module name="provider" />
+        <module name="service_common" />
+        <module name="service_provider" />
+        <module name="ServiceApi" />
+        <module name="ServiceCommon" />
+        <module name="ServiceProvider" />
+        <module name="WeChatSdk" />
+        <module name="weixinsdk" />
+        <module name="wxmall-service-api" />
+        <module name="wxmallserviceapi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="admin" target="1.7" />
+      <module name="common" target="1.7" />
       <module name="JunLinManager" target="1.7" />
       <module name="manager" target="1.7" />
+      <module name="mobile" target="1.7" />
+      <module name="model" target="1.7" />
+      <module name="provider" target="1.7" />
       <module name="ServerManager" target="1.7" />
+      <module name="service_common" target="1.7" />
+      <module name="service_provider" target="1.7" />
+      <module name="ServiceApi" target="1.7" />
+      <module name="ServiceCommon" target="1.7" />
+      <module name="ServiceProvider" target="1.7" />
+      <module name="WeChatSdk" target="1.7" />
+      <module name="weixinsdk" target="1.7" />
+      <module name="wxmall-service-api" target="1.7" />
+      <module name="wxmallserviceapi" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

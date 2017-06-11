@@ -31,7 +31,7 @@ public class PersonController extends Controller {
         rendFlag = false;
         final String user = getPara("user");
         final String code = getPara("code");
-        logger.info("code:" + code + "\n用户信息：" + user);
+        logger.info("======开始登录:\ncode:" + code + "\n用户信息：" + user);
 
         // 得到HttpSession
         PersonService.getSessionInfo(user, code, new PersonService.ILiteCallback() {

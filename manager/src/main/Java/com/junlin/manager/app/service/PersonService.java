@@ -45,7 +45,7 @@ public class PersonService {
         APIInteractive.getWeChatSession(LiteConstants.AppID, LiteConstants.AppSecret, JsCode, new INetworkResponse() {
             @Override
             public void onFailure(int code) {
-                logger.error("失败");
+                logger.error("登录失败");
                 if (null == callback) {
                     return;
                 }
@@ -54,7 +54,7 @@ public class PersonService {
 
             @Override
             public void onSucceed(JSONObject result) {
-                logger.info("结果" + result.toString());
+                logger.info("登录结果" + result.toString());
                 if (null == callback) {
                     return;
                 }

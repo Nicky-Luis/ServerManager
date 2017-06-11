@@ -6,7 +6,7 @@ package com.junlin.manager.app;
  */
 public class LiteConstants {
     //小程序AppID
-    public final static String AppID = "wx84c31c67a7c469a5";
+    public final static String AppID = "wxd0c062245d648781";
     //小程序AppSecret
-    public final static String AppSecret = "807c5031a62ac285cffdb23cb4edb017";
+    public final static String AppSecret = "ae47862cefd4d08864085a106d1db0c2";
 }

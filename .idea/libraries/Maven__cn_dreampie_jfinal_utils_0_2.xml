@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: cn.dreampie:jfinal-utils:0.2">
+    <CLASSES>
+      <root url="jar://E:/idea_wkspace/maven/repo/cn/dreampie/jfinal-utils/0.2/jfinal-utils-0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/idea_wkspace/maven/repo/cn/dreampie/jfinal-utils/0.2/jfinal-utils-0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/idea_wkspace/maven/repo/cn/dreampie/jfinal-utils/0.2/jfinal-utils-0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

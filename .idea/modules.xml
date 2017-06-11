@@ -3,7 +3,17 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ServerManager.iml" filepath="$PROJECT_DIR$/ServerManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceApi/ServiceApi.iml" filepath="$PROJECT_DIR$/ServiceApi/ServiceApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceCommon/ServiceCommon.iml" filepath="$PROJECT_DIR$/ServiceCommon/ServiceCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceProvider/ServiceProvider.iml" filepath="$PROJECT_DIR$/ServiceProvider/ServiceProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeChatSdk/WeChatSdk.iml" filepath="$PROJECT_DIR$/WeChatSdk/WeChatSdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/admin/admin.iml" filepath="$PROJECT_DIR$/admin/admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/manager/manager.iml" filepath="$PROJECT_DIR$/manager/manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceCommon/service_common.iml" filepath="$PROJECT_DIR$/ServiceCommon/service_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceProvider/service_provider.iml" filepath="$PROJECT_DIR$/ServiceProvider/service_provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceApi/wxmall-service-api.iml" filepath="$PROJECT_DIR$/ServiceApi/wxmall-service-api.iml" />
     </modules>
   </component>
 </project>
