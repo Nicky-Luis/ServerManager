@@ -3,7 +3,7 @@ package com.junlin.manager.jedis;
 import java.util.Set;
 
 import redis.clients.jedis.Jedis;
-import static com.junlin.manager.jedis.JedisUtils.getJedis;
+import static com.junlin.manager.jedis.RedisUtils.getJedis;
 
 /**
  * Created by junlinhui eight on 2017/6/8.

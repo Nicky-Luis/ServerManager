@@ -19,14 +19,14 @@ import redis.clients.jedis.JedisPoolConfig;
  * Redis工具类
  * Created by caicf on 2017/1/1.
  */
-public class JedisUtils {
+public class RedisUtils {
 
     //日志
-    private static final Logger log = LoggerFactory.getLogger(JedisUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(RedisUtils.class);
     //属性
     private static Prop properties;
     //实例
-    private static JedisUtils instance;
+    private static RedisUtils instance;
     //jedisPool
     private static JedisPool jedisPool;
     //lock
@@ -39,7 +39,7 @@ public class JedisUtils {
     public final Hash HASH = new Hash();
     public final SortSet SORTSET = new SortSet();
 
-    private JedisUtils() {
+    private RedisUtils() {
     }
 
     /**
@@ -47,11 +47,11 @@ public class JedisUtils {
      *
      * @return
      */
-    private static JedisUtils getInstance() {
+    private static RedisUtils getInstance() {
         if (instance == null) {
             lock.lock();
             if (instance == null) {
-                instance = new JedisUtils();
+                instance = new RedisUtils();
             }
             lock.unlock();
         }
@@ -115,7 +115,7 @@ public class JedisUtils {
         map.put("2", "sfasdfa");
         map.put("3", "sfawrwere3fa");
 
-        JedisUtils instance =JedisUtils.getInstance();
+        RedisUtils instance = RedisUtils.getInstance();
         String werwe = instance.STRINGS.set("werwe", JSON.toJSONString(map));
         System.out.println(werwe);
         String s = instance.STRINGS.get("werwe");
