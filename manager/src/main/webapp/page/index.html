@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>君临</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件,务必在bootstrap.min.js 之前引入 -->
+    <script src="../lib/jQuery/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <!--vue-->
+    <script src="../lib/vue/vue.js"></script>
+    <!--axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+
+<body>
+<div class="container">
+    <h1>君临 • M</h1>
+
+    <div id="header">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/index">微信</a>
+                </div>
+
+                <div class="navbar-header">
+                    <button @click="startGet('/init')" type="button" class="btn btn-default navbar-btn">初始化</button>
+                    <button @click="startGet('/reset')" type="button" class="btn btn-default navbar-btn">停止</button>
+                    <button @click="startGet('/test')" type="button" class="btn btn-default navbar-btn">测试</button>
+                    <button @click="startGet('/crawl/mode')" type="button" class="btn btn-default navbar-btn">切换模式</button>
+                    <button @click="startGet('/sogou/init')" type="button" class="btn btn-default navbar-btn">搜狗初始化</button>
+                    <button @click="startGet('/sogou/reset')" type="button" class="btn btn-default navbar-btn">搜狗重置</button>
+                    <button @click="startGet('/sogou/start')" type="button" class="btn btn-default navbar-btn">搜狗采集</button>
+                </div>
+
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" v-model="key_word">
+                    </div>
+                    <button type="submit" class="btn btn-default" @click="startSearch">搜索</button>
+                </form>
+            </div>
+        </nav>
+        <p class="panel-title ">{{status_msg}}</p>
+    </div>
+
+    <br>
+
+    <div class="panel panel-default" id="main_panel">
+        <table class="table table-striped">
+            <!--标题-->
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>阅读</th>
+                <th>点赞</th>
+            </tr>
+            </thead>
+            <!--内容-->
+            <tbody>
+            <tr v-for="person in people">
+                <td>{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+                <td>{{ person.sex }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- js -->
+<script>
+    new Vue({
+        el: '#header',
+        data: {
+            status_msg: '',
+            key_word: ''
+        },
+        methods: {
+            //get方法
+            startGet: function (path) {
+                var self = this;
+                axios.get(path)
+                    .then(function (response) {
+                        //跟新数据
+                        self.status_msg = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+
+            //搜索
+            startSearch: function () {
+                // 这里才是你的表单数据
+                var formData = JSON.stringify(this.key_word);
+                console.log(formData);
+//                axios.post('/search', formData)
+//                    .then(function (response) {
+//                        console.log(response);
+//                    })
+//                    .catch(function (error) {
+//                        console.log(error);
+//                    });
+            }
+        }
+    });
+
+    new Vue({
+        el: '#main_panel',
+        data: {
+            people: [{
+                name: 'Tracy',
+                age: 22,
+                sex: 'Female'
+            }, {
+                name: 'Chris',
+                age: 36,
+                sex: 'Male'
+            }]
+        }
+    });
+</script>
+</body>
+</html>
