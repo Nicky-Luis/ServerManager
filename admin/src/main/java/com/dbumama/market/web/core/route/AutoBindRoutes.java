@@ -57,6 +57,8 @@ public class AutoBindRoutes extends Routes {
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void config() {
+        setBaseViewPath("/WEB-INF/template");
+
         List<Class<? extends Controller>> controllerClasses
                 = ClassSearcher.of(Controller.class)
                 .includeAllJarsInLib(includeAllJarsInLib)

@@ -53,7 +53,7 @@ public class IndexController extends BaseController{
 
 	@Inject.BY_NAME
 	private PhoneCodeService phoneCodeService;
-	
+
 	final int loginFailureLockCount = 9;
 
 	public void index(){
@@ -66,26 +66,26 @@ public class IndexController extends BaseController{
 		/*Long prizeCount = Db.queryLong("select count(*) from " + Prize.table + " p "
 				+ "left join " +PrizeType.table+ " t on p.prize_type_id=t.id where p.active=1 and p.seller_id=? and t.active=1 ", getSellerId());
 		setAttr("prizeCount", prizeCount);*/
-		
+
 		Long buyerCount = Db.queryLong("select count(*) from " + BuyerUser.table + " where active=1 and seller_id=? ", getSellerId());
 		setAttr("buyerCount", buyerCount == null ? 0L : buyerCount);
-		
+
 		Long orderNum=Db.queryLong("select count(id) as num from t_order where seller_id=?",getSellerId());
 		setAttr("orderNum", orderNum == null ? 0L : orderNum);
-		
+
 		BigDecimal totalIncome=Db.queryBigDecimal("SELECT sum(o.pay_fee) AS total_income FROM t_order o "+
 		                         "  WHERE date_format(o.created, '%Y-%m') = date_format(now(), '%Y-%m') AND o.payment_status = 2");
 		setAttr("totalIncome", totalIncome == null ? new BigDecimal(0) : totalIncome);
-		
+
 		Long productCount = Db.queryLong("select count(*) from " + Product.table + " where active=1 and is_marketable=1 and seller_id=? ", getSellerId());
 		setAttr("productCount", productCount == null ? 0L : productCount);
-		
-		
+
+
 	}
-	
+
 	public void chartData(){
 		//一个月内每天的已支付订单总数统计
-		String sql="select DATE_FORMAT(created,'%Y-%m-%d') as dt, count(id) as numCount, To_Days(DATE_FORMAT(NOW(),'%Y-%m-%d')) - To_Days(DATE_FORMAT(created,'%Y-%m-%d')) as dc " 
+		String sql="select DATE_FORMAT(created,'%Y-%m-%d') as dt, count(id) as numCount, To_Days(DATE_FORMAT(NOW(),'%Y-%m-%d')) - To_Days(DATE_FORMAT(created,'%Y-%m-%d')) as dc "
 					+ " from t_order where payment_status=2 group by DATE_FORMAT(created,'%Y-%m-%d') HAVING dc<=30";
 		List<Record> records=Db.find(sql);
 		JSONArray array=new JSONArray();
@@ -101,7 +101,7 @@ public class IndexController extends BaseController{
 			}
 		}
 		//一个月内每天的总订单总数统计
-		String sql2="select DATE_FORMAT(created,'%Y-%m-%d') as dt, count(id) as numCount, To_Days(DATE_FORMAT(NOW(),'%Y-%m-%d')) - To_Days(DATE_FORMAT(created,'%Y-%m-%d')) as dc " 
+		String sql2="select DATE_FORMAT(created,'%Y-%m-%d') as dt, count(id) as numCount, To_Days(DATE_FORMAT(NOW(),'%Y-%m-%d')) - To_Days(DATE_FORMAT(created,'%Y-%m-%d')) as dc "
 				+ " from t_order group by DATE_FORMAT(created,'%Y-%m-%d') HAVING dc<=30";
 		List<Record> records2=Db.find(sql2);
 		JSONArray array2=new JSONArray();
@@ -116,17 +116,17 @@ public class IndexController extends BaseController{
 				array2.add(json);
 			}
 		}
-		
+
 		Map<String, JSONArray> dataMap = new HashMap<String, JSONArray>();
 		dataMap.put("data1", array);
 		dataMap.put("data2", array2);
 		rendSuccessJson(dataMap);
 	}
-	
+
 	public void login(){
 		render("login.html");
 	}
-	
+
 	public void logout(){
 		Subject currentUser = SecurityUtils.getSubject();
 		if (SecurityUtils.getSubject().getSession() != null) {
@@ -134,25 +134,28 @@ public class IndexController extends BaseController{
 		}
 		redirect("/");
 	}
-	
+
 	@Clear
 	public void auth(){
 		final String phone = getPara("username");
 		final String password = getPara("password");
 		final String captchaToken = getPara("captchaToken");
-		
+
+        String str = DigestUtils.md5Hex("123456");
+        System.out.println("密码："+str);
+
 		//check 验证码
 		if(!ShiroKit.doCaptcha("captcha", captchaToken)){
 			rendFailedJson("验证码错误");
 			return;
 		}
-		
-		SellerUser admin = SellerUser.dao.findFirst("select * from t_seller_user where phone = ?", phone);		
+
+		SellerUser admin = SellerUser.dao.findFirst("select * from t_seller_user where phone = ?", phone);
 		// 开始验证
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(phone, DigestUtils.md5Hex(password));
 		token.setRememberMe(false);
-		
+
 		try {
 			subject.login(token);
 		} catch (UnknownAccountException ue) {
@@ -186,7 +189,7 @@ public class IndexController extends BaseController{
 			rendFailedJson("登录失败");
 			return;
 		}
-			
+
 		// 登录成功后
 		if(ShiroMethod.authenticated()) {
 			admin.setLoginTime(new Date());
@@ -194,13 +197,13 @@ public class IndexController extends BaseController{
 			admin.set("admi_login_failure_count", 0);
 			admin.update();
 			rendSuccessJson();
-		} 
+		}
 	}
-	
+
 	public void register(){
 		render("register.html");
 	}
-	
+
 	@Clear
 	public void doRegister(){
 		final String phone = getPara("phone");
@@ -224,18 +227,18 @@ public class IndexController extends BaseController{
 			rendFailedJson("手机验证码不能为空");
 			return;
 		}
-		
+
 		if(!password.equals(confirmPwd)){
 			rendFailedJson("两次输入的密码不一样");
 			return;
 		}
-		
+
 		//check 验证码
 		if(!ShiroKit.doCaptcha("captcha", captchaToken)){
 			rendFailedJson("验证码错误");
 			return;
 		}
-		
+
 		//check 手机验证码
 		UserCode userCode = UserCode.dao.findFirst("select * from " + UserCode.table + " where vcode_phone=? and vcode_code=? ", phone, code);
 		if(userCode == null){
@@ -249,7 +252,7 @@ public class IndexController extends BaseController{
 			rendFailedJson("验证码已过期");
 			return;
 		}
-		
+
 		SellerUser sellerUser = new SellerUser();
 		sellerUser.setPhone(phone);
 		sellerUser.setPassword(DigestUtils.md5Hex(password));
@@ -262,7 +265,7 @@ public class IndexController extends BaseController{
 		sellerUser.save();
 		rendSuccessJson();
 	}
-	
+
 	public void sendCode(){
 		final String phone = getPara("phone");
 		if(StringUtils.isEmpty(phone)){
@@ -273,9 +276,9 @@ public class IndexController extends BaseController{
 			rendSuccessJson(phoneCodeService.getCode(phone, IpKit.getRealIpV2(getRequest())));
 		} catch (UserException e) {
 			rendFailedJson(e.getMessage());
-		} 
+		}
 	}
-	
+
 	@Clear
     public void captcha() {
         int width = 0, height = 0, minnum = 0, maxnum = 0, fontsize = 0;
@@ -321,9 +324,9 @@ public class IndexController extends BaseController{
         captcha.setRandomColor(true);
         render(captcha);
     }
-	
+
 	public void help(){
 		renderJsp("help.html");
 	}
-	
+
 }

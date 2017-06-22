@@ -40,7 +40,7 @@ public final class JFWebConfig extends JFinalConfig{
 		loadPropertyFile("system.properties");
 		PropKit.use("system.properties");
 		
-//		me.setBaseUploadPath("/");
+		me.setBaseUploadPath("/");
 		me.setEncoding("UTF-8");
 		me.setI18nDefaultBaseName("i18n");
 		me.setMaxPostSize(1024 * 1024 * 5);
