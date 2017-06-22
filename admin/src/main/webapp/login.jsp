@@ -3,14 +3,14 @@
 <html>
 <head>
 <title>XXX微商平台 -- 登陆</title>
-<%-- <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/ico/favicon.ico" type="image/x-icon" /> --%>    
+<%-- <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/ico/favicon.ico" type="image/x-icon" /> --%>
 <!-- Css files -->
-<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet"/>		
-<link href="${pageContext.request.contextPath}/resources/assets/css/font-awesome.min.css?v=4.4.0" rel="stylesheet"/>		
+<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/resources/assets/css/font-awesome.min.css?v=4.4.0" rel="stylesheet"/>
 <link href="${pageContext.request.contextPath}/resources/assets/css/animate.css" rel="stylesheet"/>
 <link href="${pageContext.request.contextPath}/resources/assets/css/style.css?v=4.1.0" rel="stylesheet"/>
 <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js?v=2.1.4"></script>
-<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js?v=3.3.6"></script>	
+<script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="${pageContext.request.contextPath}/resources/js/obz.js"></script>
 <!-- end: JavaScript-->
 </head>
@@ -40,9 +40,9 @@
 				</div>
 			</div>
             <button id="loginBtn" type="button" class="btn btn-primary block full-width m-b">登 录</button>
-            <%-- <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | 
+             <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> |
             <a href="${pageContext.request.contextPath}/register">注册一个新账号</a>
-            </p> --%>
+             </p>
         </form>
     </div>
 </div>
@@ -63,7 +63,7 @@ $(function(){
 	if(!browerKernel.isWebkit()){
 		alert("您当前浏览器无法兼容本系统！\n推荐使用Google Chrome 浏览器！\n\n其它兼容浏览器：\n360浏览器极速模式\n搜狗高速浏览器3\n世界之窗极速版\n猎豹浏览器\nQQ浏览器\n其它浏览器请自测");
 	}
-	
+
 	var $captcha = $("#captcha");
 	var $captchaImage = $("#captchaImage");
 	var change_captcha = function() {
@@ -77,29 +77,29 @@ $(function(){
 	};
 
 	$captchaImage.click(change_captcha);
-	
+
 	function login(){
 		var username = $("#username").val();
 		var password = $("#password").val();
-		
+
 		if(username == "" || password == ""){
 			//BootstrapDialog.alert({title:'提示', message:'请填写账号密码！'});
 			alert("请填写账号密码！");
 			return;
 		}
-		
+
 		var captcha = $("#captcha").val();
-		
+
 		if(captcha == null || captcha ==""){
 			alert("请输入验证码");
 			return;
 		}
-		
+
 		var params = {};
 		params.username = username;
 		params.password = password;
 		params.captchaToken = captcha;
-		
+
 		obz.ajaxJson("${pageContext.request.contextPath}/auth", params, function(resp){
 			if(resp.code != 200){
 				//BootstrapDialog.alert({title:'提示', message:resp.msg});
@@ -111,17 +111,17 @@ $(function(){
 			location.href = "${pageContext.request.contextPath}/";
 		});
 	}
-	
+
 	$("#loginBtn").click(function(){
 		login();
 	});
-	
+
 	$(document).keyup(function(event){
 		if(event.keyCode ==13){
 			login();
 		}
 	});
-	
+
 });
 
 </script>

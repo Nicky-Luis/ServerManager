@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-[#include "/includes/header.html" /]
+#include("includes/header.html")
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg">
 <div class="middle-box text-center loginscreen   animated fadeInDown">
@@ -89,29 +89,29 @@ $(function(){
 		var password = $("#password").val();
 		var confirmPwd = $("#confirmpassword").val();
 		var phoneCode = $("#phone_code").val();
-		
+
 		if(phone == "" || password == "" || confirmPwd == "" || phoneCode == ""){
 			alert("请填写完整的注册信息！");
 			return;
 		}
-		
+
 		if(password != confirmPwd){
 			alert("两次密码输入不一致");
 			return;
 		}
-		
+
 		var captcha = $("#captcha").val();
-		
+
 		if(captcha == null || captcha ==""){
 			alert("请输入验证码");
 			return;
 		}
-		
+
 		if(!$("input[name='agree']").is(':checked')){
 			alert("请同意用户协议");
-			return;			
+			return;
 		}
-		
+
 		var params = {};
 		params.phone = phone;
 		params.password = password;
@@ -163,6 +163,6 @@ $(function(){
 });
 
 </script>	
-[#include "/includes/header.html" /]
+#include ("includes/header.html")
 </body>
 </html>	
